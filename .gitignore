@@ -1,0 +1,21 @@
+# Compiled output
+/target/
+
+# Cargo package artifacts
+**/*.rs.bk
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# By default Cargo creates a /target directory in each workspace member,
+# but sometimes you might have nested target dirs
+**/target/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
