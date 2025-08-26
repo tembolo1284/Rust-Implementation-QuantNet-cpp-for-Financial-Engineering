@@ -1,0 +1,10 @@
+[package]
+name = "point_class"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+[[bin]]
+name = "point_demo"
+path = "src/main.rs"
