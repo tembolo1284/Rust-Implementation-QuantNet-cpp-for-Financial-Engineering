@@ -1,5 +1,4 @@
 use std::io;
-use std::fmt;
 
 mod point;
 use point::Point;
