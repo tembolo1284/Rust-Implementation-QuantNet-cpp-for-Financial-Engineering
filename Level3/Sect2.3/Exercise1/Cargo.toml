@@ -1,0 +1,10 @@
+[package]
+name = "point_constructors"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+[[bin]]
+name = "constructor_demo"
+path = "src/main.rs"
