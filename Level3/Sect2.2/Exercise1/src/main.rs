@@ -1,3 +1,40 @@
+// Exercise 1: Point Class
+// =======================
+// Create a Point class with x- and y-coordinates. This class will be extended in further exercises.
+//
+// Requirements:
+// 
+// Header File (point.rs in Rust):
+// - Private members for x- and y-coordinates (fields are private by default in Rust)
+// - No need for #ifndef/#define/#endif (Rust's module system prevents multiple inclusion)
+//
+// Public Functionality:
+// - Default constructor (Default trait implementation)
+// - Destructor (Drop trait - optional in Rust due to automatic memory management)
+// - Getter functions for x- and y-coordinates (get_x() and get_y())
+// - Setter functions for x- and y-coordinates (set_x() and set_y())
+// - ToString() function that returns a string description of the point
+//   (to_string() method, plus Display trait for formatting)
+//
+// Implementation Notes:
+// - In C++: Use std::stringstream for double-to-string conversion
+// - In Rust: Use format! macro or Display trait
+// - Expected output format: "Point(1.5, 3.9)"
+//
+// Test Program Requirements (main function):
+// 1. Include the point module (mod point; use point::Point;)
+// 2. Ask the user for x- and y-coordinates using std::io::stdin()
+// 3. Create a Point object using the default constructor
+// 4. Set the coordinates entered by the user using setter functions
+// 5. Print the description of the point returned by to_string()
+// 6. Print the point coordinates using the getter functions
+//
+// C++ to Rust Translation Notes:
+// - std::cin → std::io::stdin().read_line()
+// - std::stringstream → format! macro
+// - Class → Struct with impl block
+// - Private by default → Fields are private by default in Rust
+
 use std::io;
 
 mod point;

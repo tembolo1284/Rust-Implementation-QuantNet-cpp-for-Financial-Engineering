@@ -1,0 +1,10 @@
+[package]
+name = "distance_functions"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+[[bin]]
+name = "distance_demo"
+path = "src/main.rs"
