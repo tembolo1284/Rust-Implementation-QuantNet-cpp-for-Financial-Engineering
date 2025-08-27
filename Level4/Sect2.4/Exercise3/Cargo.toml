@@ -1,0 +1,65 @@
+[package]
+name = "level4_section2_5_exercise3"
+version = "0.1.0"
+edition = "2021"
+authors = ["Paul Lopez"]
+description = "Level 4, Section 2.5, Exercise 3: Constructors as Conversion Operators"
+
+# Optimization settings
+[profile.release]
+opt-level = 3
+lto = true
+panic = "abort"
+
+[profile.dev]
+opt-level = 0
+debug = true
+panic = "unwind"
+
+# No external dependencies needed - using only std library
+[dependencies]
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+
+# Package metadata
+[package.metadata]
+exercise = "3"
+level = "4"
+section = "2.5"
+title = "Constructors as Conversion Operators"
+concepts = [
+    "Single-argument constructor conversion",
+    "From<T> and Into<T> traits in Rust",
+    "PartialEq<T> for cross-type comparisons",
+    "Explicit vs implicit conversions",
+    "Type safety in conversion",
+    "Symmetric comparison operators",
+    "Constructor delegation",
+    "Trait-based conversion system"
+]
+
+cpp_equivalent = [
+    "Point(double value); // Single-argument constructor",
+    "if (point == 1.0) // Implicit conversion",
+    "explicit Point(double value); // Prevent implicit conversion",
+    "if (point == (Point)1.0) // Explicit conversion",
+    "Constructor used as conversion operator"
+]
+
+rust_approach = [
+    "Point::from_single_value(value) // Explicit method",
+    "impl From<f64> for Point // Trait-based conversion",
+    "impl PartialEq<f64> for Point // Cross-type comparison",
+    "let p: Point = value.into(); // Using Into trait",
+    "No implicit conversions - all explicit via traits"
+]
+
+key_differences = [
+    "Rust prevents accidental implicit conversions",
+    "Explicit trait implementations for all conversions",
+    "Type safety enforced at compile time",
+    "Symmetric operations require explicit implementation",
+    "No constructor overloading - use different method names"
+]

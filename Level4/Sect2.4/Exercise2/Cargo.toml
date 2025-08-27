@@ -1,0 +1,61 @@
+[package]
+name = "level4_section2_5_exercise2"
+version = "0.1.0"
+edition = "2021"
+authors = ["Paul Lopez"]
+description = "Level 4, Section 2.5, Exercise 2: Ostream << Operator (Display trait)"
+
+# Optimization settings
+[profile.release]
+opt-level = 3
+lto = true
+panic = "abort"
+
+[profile.dev]
+opt-level = 0
+debug = true
+panic = "unwind"
+
+# No external dependencies needed - using only std library
+[dependencies]
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+
+# Package metadata
+[package.metadata]
+exercise = "2"
+level = "4"
+section = "2.5"
+title = "Ostream << Operator (Display trait)"
+concepts = [
+    "std::fmt::Display trait",
+    "Equivalent to C++ ostream << operator",
+    "Custom ToString methods",
+    "Multiple formatting options",
+    "std::fmt::Debug for detailed output",
+    "std::fmt::LowerExp for scientific notation",
+    "Format specifiers and precision",
+    "Alternate format ({:#}) for detailed output",
+    "Global function equivalent in Rust traits",
+    "String interpolation and formatting"
+]
+
+cpp_equivalent = [
+    "ostream& operator << (ostream& os, const Point& p);",
+    "ostream& operator << (ostream& os, const Line& line);", 
+    "ostream& operator << (ostream& os, const Circle& circle);",
+    "Global functions outside class definitions",
+    "Using ToString() method in implementation",
+    "cout << object; syntax"
+]
+
+rust_advantages = [
+    "Type-safe formatting with compile-time checking",
+    "Multiple formatting traits (Display, Debug, Binary, etc.)",
+    "Built-in precision and alignment support",
+    "No memory management concerns",
+    "Consistent interface across all types",
+    "Better error handling with Result type"
+]

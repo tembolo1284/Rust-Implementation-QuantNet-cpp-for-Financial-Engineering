@@ -1,0 +1,43 @@
+[package]
+name = "level4_section2_5_exercise1"
+version = "0.1.0"
+edition = "2021"
+authors = ["Paul Lopez"]
+description = "Level 4, Section 2.5, Exercise 1: Adding Operators to Point class"
+
+# Optimization settings
+[profile.release]
+opt-level = 3
+lto = true
+panic = "abort"
+
+[profile.dev]
+opt-level = 0
+debug = true
+panic = "unwind"
+
+# No external dependencies needed - using only std library
+[dependencies]
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+
+# Package metadata
+[package.metadata]
+exercise = "1"
+level = "4"
+section = "2.5"
+title = "Adding Operators to Point class"
+concepts = [
+    "Operator overloading via traits",
+    "std::ops::Neg for unary minus",
+    "std::ops::Mul for scalar multiplication", 
+    "std::ops::Add for point addition",
+    "std::cmp::PartialEq for equality",
+    "std::ops::MulAssign for compound assignment",
+    "Automatic assignment in Rust",
+    "Self-assignment prevention",
+    "Chaining operators",
+    "Copy vs Move semantics"
+]
