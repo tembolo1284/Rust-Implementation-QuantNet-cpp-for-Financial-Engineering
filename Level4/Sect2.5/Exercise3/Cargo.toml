@@ -1,0 +1,124 @@
+[package]
+name = "level4_section2_5_exercise3"
+version = "0.1.0"
+edition = "2021"
+authors = ["Paul Lopez"]
+description = "Level 4, Section 2.5, Exercise 3: Creating Array Class (RAII and Memory Management)"
+
+# Optimization settings
+[profile.release]
+opt-level = 3
+lto = true
+panic = "abort"
+
+[profile.dev]
+opt-level = 0
+debug = true
+panic = "unwind"
+
+# No external dependencies needed - using only std library
+[dependencies]
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+
+# Package metadata
+[package.metadata]
+exercise = "3"
+level = "4"
+section = "2.5"
+title = "Creating Array Class"
+concepts = [
+    "RAII (Resource Acquisition Is Initialization)",
+    "Custom container class implementation",
+    "Copy constructor equivalent (Clone trait)",
+    "Assignment operator equivalent (Clone + assignment)",
+    "Destructor equivalent (Drop trait - automatic)",
+    "Index operator overloading (Index and IndexMut traits)",
+    "Const correctness (immutable vs mutable references)",
+    "Bounds checking and error handling",
+    "Memory management through ownership",
+    "Self-assignment safety (automatic in Rust)",
+    "Deep vs shallow copy semantics",
+    "Automatic memory cleanup"
+]
+
+cpp_equivalent = [
+    "class Array {",
+    "    Point* m_data;     // Raw pointer to dynamic array",
+    "    size_t m_size;     // Size of the array",
+    "public:",
+    "    Array(size_t size = 10);               // Constructor",
+    "    Array(const Array& other);             // Copy constructor", 
+    "    ~Array();                              // Destructor",
+    "    Array& operator=(const Array& other);  // Assignment operator",
+    "    Point& operator[](int index);          // Index operator",
+    "    const Point& operator[](int index) const; // Const index operator",
+    "    size_t Size() const;                   // Size getter",
+    "    void SetElement(int index, const Point& p); // Element setter",
+    "    Point& GetElement(int index);          // Element getter",
+    "};"
+]
+
+rust_approach = [
+    "struct Array {",
+    "    data: Vec<Point>,  // Owned vector provides dynamic array",
+    "}",
+    "",
+    "impl Array {",
+    "    pub fn new() -> Self;                    // Constructor",
+    "    pub fn with_size(size: usize) -> Self;  // Constructor with size",
+    "    // Clone trait provides copy constructor automatically",
+    "    // Drop trait provides destructor automatically", 
+    "    // Assignment via clone: arr2 = arr1.clone();",
+    "    pub fn size(&self) -> usize;             // Size getter",
+    "    pub fn set_element(&mut self, index: usize, point: Point);",
+    "    pub fn get_element(&self, index: usize) -> Point;",
+    "}",
+    "",
+    "impl Index<usize> for Array;     // arr[i] reading",
+    "impl IndexMut<usize> for Array;  // arr[i] writing"
+]
+
+key_differences = [
+    "Rust: No manual memory management (new/delete)",
+    "Rust: Automatic cleanup via Drop trait", 
+    "Rust: Clone trait for deep copying",
+    "Rust: Ownership prevents memory leaks and double-free",
+    "Rust: Index traits for operator overloading",
+    "Rust: Compile-time const correctness via borrowing",
+    "Rust: Self-assignment safe by design",
+    "Rust: Bounds checking can be enforced",
+    "Rust: No null pointer dereferences possible",
+    "Rust: Thread safety through ownership rules"
+]
+
+raii_principles = [
+    "Resource acquisition happens in constructor",
+    "Resource cleanup happens in destructor (Drop)",
+    "Object lifetime determines resource lifetime",
+    "Exception safety through automatic cleanup",
+    "No manual resource management required",
+    "Prevents resource leaks and double-cleanup"
+]
+
+rule_of_three_five = [
+    "C++ Rule of Three: If class needs destructor, copy constructor, or assignment operator, it probably needs all three",
+    "C++ Rule of Five: Add move constructor and move assignment operator",
+    "Rust: These are handled automatically by traits:",
+    "  - Drop trait = destructor",
+    "  - Clone trait = copy constructor + assignment operator", 
+    "  - Move semantics = automatic via ownership system",
+    "  - Self-assignment safety = guaranteed by type system"
+]
+
+memory_safety_features = [
+    "Ownership prevents use-after-free",
+    "Borrowing prevents data races",
+    "No null pointer dereferences", 
+    "Automatic bounds checking available",
+    "No buffer overflows with safe indexing",
+    "No memory leaks with automatic cleanup",
+    "No double-free errors with move semantics"
+]
