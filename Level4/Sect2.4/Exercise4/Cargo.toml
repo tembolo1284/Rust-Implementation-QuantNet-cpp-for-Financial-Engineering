@@ -1,0 +1,85 @@
+[package]
+name = "level4_section2_5_exercise4"
+version = "0.1.0"
+edition = "2021"
+authors = ["Paul Lopez"]
+description = "Level 4, Section 2.5, Exercise 4: Friends (Module-based visibility)"
+
+# Optimization settings
+[profile.release]
+opt-level = 3
+lto = true
+panic = "abort"
+
+[profile.dev]
+opt-level = 0
+debug = true
+panic = "unwind"
+
+# No external dependencies needed - using only std library
+[dependencies]
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+
+# Package metadata
+[package.metadata]
+exercise = "4"
+level = "4"
+section = "2.5"
+title = "Friends (Module-based visibility)"
+concepts = [
+    "C++ friend functions equivalent",
+    "pub(crate) visibility modifier",
+    "Module-based access control",
+    "Direct field access within module",
+    "Encapsulation boundaries in Rust",
+    "Alternative to C++ friend declarations",
+    "Same-module trait implementations",
+    "Controlled visibility without breaking encapsulation"
+]
+
+cpp_equivalent = [
+    "friend ostream& operator << (ostream& os, const Point& p);",
+    "friend ostream& operator << (ostream& os, const Line& line);",
+    "friend ostream& operator << (ostream& os, const Circle& circle);",
+    "Friend functions can access private members",
+    "Global functions with private member access",
+    "Breaking data hiding for specific functions"
+]
+
+rust_approach = [
+    "pub(crate) fields - visible within crate only",
+    "Module-based visibility control",
+    "No friend declarations needed",
+    "Direct field access in same-module functions",
+    "Public getters still available for external access",
+    "Better encapsulation control than C++ friends"
+]
+
+key_differences = [
+    "Rust: Module-level visibility vs C++ friend declarations",
+    "Rust: pub(crate) visible to entire crate, not specific functions",
+    "Rust: No way to grant access to specific external functions",
+    "Rust: Cleaner encapsulation model with clear boundaries",
+    "Rust: Compile-time visibility enforcement",
+    "Rust: External crates cannot access pub(crate) fields"
+]
+
+advantages = [
+    "No need for friend declarations in header files",
+    "Module system provides natural access boundaries", 
+    "Cannot accidentally grant access to wrong functions",
+    "Consistent visibility rules across entire language",
+    "External crates automatically respect boundaries",
+    "No complex friend template scenarios"
+]
+
+module_access_examples = [
+    "impl fmt::Display can access pub(crate) fields directly",
+    "Helper functions in same module have full access",
+    "Debug implementations can show internal structure",
+    "Mathematical operations can use direct field access",
+    "No performance overhead from getter function calls"
+]
