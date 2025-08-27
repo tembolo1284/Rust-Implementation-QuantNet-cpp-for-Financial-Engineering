@@ -1,0 +1,88 @@
+[package]
+name = "level4_section2_5_exercise2"
+version = "0.1.0"
+edition = "2021"
+authors = ["Paul Lopez"]
+description = "Level 4, Section 2.5, Exercise 2: Creating Array of Pointers (Vec<Box<T>>)"
+
+# Optimization settings
+[profile.release]
+opt-level = 3
+lto = true
+panic = "abort"
+
+[profile.dev]
+opt-level = 0
+debug = true
+panic = "unwind"
+
+# No external dependencies needed - using only std library
+[dependencies]
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+
+# Package metadata
+[package.metadata]
+exercise = "2"
+level = "4"
+section = "2.5"
+title = "Creating Array of Pointers"
+concepts = [
+    "Array of pointers vs array of values",
+    "Vec<Box<T>> - vector of heap-allocated objects",
+    "Two-step process: create array, then create objects",
+    "Individual heap allocations per object",
+    "Different constructors for each array element",
+    "Automatic memory management for complex structures",
+    "Memory layout differences between approaches",
+    "Performance trade-offs between approaches",
+    "Ownership and borrowing with heap objects",
+    "Iteration patterns for pointer arrays"
+]
+
+cpp_equivalent = [
+    "Point** arr = new Point*[3]; // Array of pointers",
+    "arr[0] = new Point(1.0, 2.0); // Individual allocations",
+    "arr[1] = new Point(); // Different constructors",
+    "arr[2] = new Point(5.0, 6.0);",
+    "for(int i = 0; i < 3; i++) cout << *arr[i];",
+    "for(int i = 0; i < 3; i++) delete arr[i]; // Delete objects",
+    "delete[] arr; // Delete array"
+]
+
+rust_approach = [
+    "let mut arr: Vec<Box<Point>> = Vec::with_capacity(3);",
+    "arr.push(Box::new(Point::new(1.0, 2.0))); // Individual allocations",
+    "arr.push(Box::new(Point::default())); // Different constructors", 
+    "arr.push(Box::new(Point::from_single_value(5.0)));",
+    "for point in &arr { println!(\"{}\", point); }",
+    "// Automatic cleanup when arr goes out of scope",
+    "// Each Box<Point> automatically drops its Point"
+]
+
+memory_layout_comparison = [
+    "Vec<Point>: [Point][Point][Point] - single heap allocation",
+    "Vec<Box<Point>>: [Box*][Box*][Box*] -> [Point] [Point] [Point]",
+    "Each Point in separate heap allocation with Vec<Box<Point>>",
+    "More memory overhead but allows different lifetimes",
+    "Similar to C++ array of pointers memory pattern"
+]
+
+key_differences = [
+    "Rust: No manual delete required for array or objects",
+    "Rust: Box<T> cannot be null, always points to valid data",
+    "Rust: Automatic drop when Box goes out of scope",
+    "Rust: Ownership system prevents double-free errors",
+    "Rust: Iterator-based processing more idiomatic",
+    "Rust: Memory safety without garbage collection overhead"
+]
+
+when_to_use = [
+    "Use Vec<T> when all objects have same lifetime",
+    "Use Vec<Box<T>> when objects need different lifetimes",
+    "Use Vec<Box<T>> for large objects to avoid moves",
+    "Use Vec<Box<T>> when constructors need different parameters",
+    "Consider cache performance implications of pointer indirection"
+]

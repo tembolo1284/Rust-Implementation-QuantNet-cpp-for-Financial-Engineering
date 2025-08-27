@@ -1,0 +1,98 @@
+[package]
+name = "level4_section2_5_exercise1"
+version = "0.1.0"
+edition = "2021"
+authors = ["Paul Lopez"]
+description = "Level 4, Section 2.5, Exercise 1: Dynamically Creating Objects (Box<T> and Vec<T>)"
+
+# Optimization settings
+[profile.release]
+opt-level = 3
+lto = true
+panic = "abort"
+
+[profile.dev]
+opt-level = 0
+debug = true
+panic = "unwind"
+
+# No external dependencies needed - using only std library
+[dependencies]
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+
+# Package metadata
+[package.metadata]
+exercise = "1"
+level = "4"
+section = "2.5"
+title = "Dynamically Creating Objects"
+concepts = [
+    "Heap vs stack allocation",
+    "Box<T> for single heap-allocated objects",
+    "Vec<T> for dynamic arrays",
+    "Box<[T]> for heap-allocated arrays",
+    "Automatic memory management via Drop trait",
+    "No manual delete required",
+    "Ownership and move semantics",
+    "Clone vs Copy for heap objects",
+    "Dynamic array creation and manipulation",
+    "Memory safety without garbage collection"
+]
+
+cpp_equivalent = [
+    "Point* p = new Point(); // Heap allocation",
+    "delete p; // Manual cleanup required",
+    "Point* arr = new Point[n]; // Dynamic array",
+    "delete[] arr; // Manual array cleanup",
+    "Point arr[n]; // Compile error - variable size on stack",
+    "Point* p2 = new Point(*p1); // Copy constructor",
+    "p->method() or (*p).method() // Pointer dereferencing"
+]
+
+rust_approach = [
+    "let p = Box::new(Point::new(...)); // Heap allocation",
+    "// Automatic cleanup when p goes out of scope",
+    "let arr = vec![Point::new(...); n]; // Dynamic array", 
+    "// Automatic array cleanup",
+    "let arr = [Point::new(...); n]; // Compile error if n not const",
+    "let p2 = Box::new(*p1); // Copy contents",
+    "p.method() // Automatic dereferencing via Deref trait"
+]
+
+key_differences = [
+    "Rust: Automatic memory management (no manual delete)",
+    "Rust: Ownership system prevents memory leaks",
+    "Rust: No null pointer dereferences",
+    "Rust: Vec<T> more flexible than C++ arrays",
+    "Rust: Box<T> safer than raw pointers",
+    "Rust: Compile-time memory safety guarantees",
+    "Rust: No double-free or use-after-free errors"
+]
+
+memory_allocation_types = [
+    "Stack: [T; N] - compile-time size, automatic cleanup",
+    "Heap single: Box<T> - single object, owned pointer", 
+    "Heap array: Box<[T]> - fixed-size heap array",
+    "Dynamic array: Vec<T> - growable, most common choice",
+    "Heap of heap: Vec<Box<T>> - array of heap objects"
+]
+
+advantages = [
+    "Memory safety without garbage collection",
+    "Zero-cost abstractions for memory management", 
+    "Automatic cleanup prevents memory leaks",
+    "Ownership system prevents data races",
+    "No manual memory management complexity",
+    "Compile-time error detection for memory issues"
+]
+
+common_patterns = [
+    "Box::new(T::new(...)) for heap allocation",
+    "vec![T::new(...); n] for n identical objects",
+    "(0..n).map(|i| T::new(...)).collect() for different objects",
+    "Vec::with_capacity(n) for pre-allocated space",
+    "Box<[T]> for heap arrays with known size"
+]
