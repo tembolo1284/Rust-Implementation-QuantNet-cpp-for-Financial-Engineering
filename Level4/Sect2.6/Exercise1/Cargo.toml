@@ -1,0 +1,124 @@
+[package]
+name = "level4_section2_6_exercise1"
+version = "0.1.0"
+edition = "2021"
+authors = ["Paul Lopez"]
+description = "Level 4, Section 2.6, Exercise 1: CAD and Container Namespaces (Module System)"
+
+# Optimization settings
+[profile.release]
+opt-level = 3
+lto = true
+panic = "abort"
+
+[profile.dev]
+opt-level = 0
+debug = true
+panic = "unwind"
+
+# No external dependencies needed - using only std library
+[dependencies]
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+
+# Package metadata
+[package.metadata]
+exercise = "1"
+level = "4"
+section = "2.6"
+title = "CAD and Container Namespaces"
+concepts = [
+    "Namespace organization equivalent (modules)",
+    "Hierarchical module structure",
+    "Full module path access",
+    "Single class imports (use statements)",
+    "Wildcard imports (use module::*)",
+    "Module aliases (use module as alias)",
+    "Cross-module usage and dependencies",
+    "Visibility control with pub keyword",
+    "Re-exports for clean API design",
+    "Module-based code organization"
+]
+
+cpp_equivalent = [
+    "namespace PaulLopez {",
+    "    namespace CAD {",
+    "        class Point;",
+    "        class Line;", 
+    "        class Circle;",
+    "        class Shape;",
+    "    }",
+    "    namespace Containers {",
+    "        class Array;",
+    "    }",
+    "}",
+    "",
+    "// Usage patterns:",
+    "PaulLopez::CAD::Point p;           // Full namespace",
+    "using PaulLopez::CAD::Line;        // Single class",
+    "using namespace PaulLopez::Containers; // Entire namespace", 
+    "namespace geom = PaulLopez::CAD;   // Namespace alias"
+]
+
+rust_approach = [
+    "mod paul_lopez {",
+    "    pub mod cad {",
+    "        pub struct Point;",
+    "        pub struct Line;",
+    "        pub struct Circle;", 
+    "        pub struct Shape;",
+    "    }",
+    "    pub mod containers {",
+    "        pub struct Array;",
+    "    }",
+    "}",
+    "",
+    "// Usage patterns:",
+    "paul_lopez::cad::Point::new(...);     // Full path",
+    "use paul_lopez::cad::Line;           // Single import",
+    "use paul_lopez::containers::*;       // Wildcard import",
+    "use paul_lopez::cad as geom;         // Module alias"
+]
+
+key_differences = [
+    "Rust: File-based module system vs C++ namespace declarations",
+    "Rust: Explicit visibility control with 'pub' keyword", 
+    "Rust: Module hierarchy mirrors file structure",
+    "Rust: Compile-time module resolution and checking",
+    "Rust: No header/implementation file separation",
+    "Rust: Privacy by default (items are private unless pub)",
+    "Rust: Re-exports allow clean public APIs",
+    "Rust: Module paths are absolute from crate root"
+]
+
+namespace_benefits = [
+    "Prevents name collisions between different libraries",
+    "Provides logical organization of related functionality",
+    "Enables encapsulation at module/namespace level", 
+    "Allows multiple implementations of same interface",
+    "Facilitates code reuse and maintainability",
+    "Supports hierarchical organization of large codebases"
+]
+
+demonstrated_patterns = [
+    "paul_lopez::cad::Point::new(...) - Full module path access",
+    "use paul_lopez::cad::Line; - Single class import",
+    "use paul_lopez::containers::*; - Wildcard namespace import",
+    "use paul_lopez::cad as geom; - Module alias creation",
+    "crate::paul_lopez::cad::Point in Array - Cross-module dependency",
+    "pub use submodule::Type; - Re-export for clean API"
+]
+
+module_structure = [
+    "src/main.rs - Main program demonstrating all usage patterns",
+    "src/paul_lopez/mod.rs - Root namespace module",
+    "src/paul_lopez/cad/mod.rs - CAD namespace with re-exports", 
+    "src/paul_lopez/cad/point.rs - Point class implementation",
+    "src/paul_lopez/cad/line.rs - Line class implementation",
+    "src/paul_lopez/cad/circle.rs - Circle class implementation",
+    "src/paul_lopez/cad/shape.rs - Shape class implementation",
+    "src/paul_lopez/containers/mod.rs - Containers namespace",
+    "src/paul_lopez/containers/array.rs - Array class implementation"
+]
