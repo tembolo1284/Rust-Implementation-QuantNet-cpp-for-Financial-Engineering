@@ -10,6 +10,7 @@ pub struct Line {
     end: Point,
 }
 
+#[allow(dead_code)]
 impl Line {
     // Constructor with two points (calls Shape constructor equivalent)
     pub fn new(start: Point, end: Point) -> Self {
@@ -107,7 +108,8 @@ impl Drop for Line {
 // Implement Display trait
 impl fmt::Display for Line {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}", self.to_string())
+        let s = <Self as Shape>::to_string(self);
+        f.write_str(&s)
     }
 }
 
@@ -135,8 +137,8 @@ mod tests {
     fn test_line_shape_trait() {
         let line = Line::new(Point::new(0.0, 0.0), Point::new(1.0, 1.0));
         assert_eq!(line.shape_type(), "Line");
-        assert!(line.to_string().contains("Line from"));
-        assert!(line.to_string().contains("ID:"));
+        assert!(format!("{line}").contains("Line from"));
+        assert!(format!("{line}").contains("ID:"));
     }
 
     #[test]

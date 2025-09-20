@@ -12,6 +12,7 @@ pub struct Circle {
     radius: f64,
 }
 
+#[allow(dead_code)]
 impl Circle {
     // Constructor with center and radius (calls Shape constructor equivalent)
     pub fn new(center: Point, radius: f64) -> Self {
@@ -119,7 +120,8 @@ impl Drop for Circle {
 // Implement Display trait
 impl fmt::Display for Circle {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}", self.to_string())
+        let s = <Self as Shape>::to_string(self);
+        f.write_str(&s)
     }
 }
 
@@ -148,9 +150,9 @@ mod tests {
     fn test_circle_shape_trait() {
         let circle = Circle::new(Point::new(1.0, 2.0), 3.0);
         assert_eq!(circle.shape_type(), "Circle");
-        assert!(circle.to_string().contains("Circle(center:"));
-        assert!(circle.to_string().contains("radius: 3.0"));
-        assert!(circle.to_string().contains("ID:"));
+        assert!(format!("{circle}").contains("Circle(center:"));
+        assert!(format!("{circle}").contains("radius: 3.0"));
+        assert!(format!("{circle}").contains("ID:"));
     }
 
     #[test]

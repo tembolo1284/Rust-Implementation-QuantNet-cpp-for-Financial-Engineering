@@ -9,6 +9,7 @@ pub struct Point {
     y: f64,
 }
 
+#[allow(dead_code)]
 impl Point {
     // Constructor with parameters (calls Shape constructor equivalent)
     pub fn new(x: f64, y: f64) -> Self {
@@ -110,7 +111,8 @@ impl Drop for Point {
 // Implement Display trait for easy printing
 impl fmt::Display for Point {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}", self.to_string())
+        let s = <Self as Shape>::to_string(self);
+        f.write_str(&s)
     }
 }
 
@@ -137,8 +139,8 @@ mod tests {
     fn test_point_shape_trait() {
         let p = Point::new(3.0, 4.0);
         assert_eq!(p.shape_type(), "Point");
-        assert!(p.to_string().contains("Point(3.0, 4.0)"));
-        assert!(p.to_string().contains("ID:"));
+        assert!(format!("{p}").contains("Point(3.0, 4.0)"));
+        assert!(format!("{p}").contains("ID:"));
     }
 
     #[test]

@@ -7,6 +7,7 @@ pub struct ShapeData {
     id: i32,
 }
 
+#[allow(dead_code)]
 impl ShapeData {
     pub fn new() -> Self {
         Self {
@@ -32,7 +33,8 @@ impl ShapeData {
 // SHAPE TRAIT WITH BASE CLASS FUNCTIONALITY
 // =============================================================================
 
-pub trait Shape {
+#[allow(dead_code)]
+pub trait Shape: fmt::Display {
     fn shape_data(&self) -> &ShapeData;
     fn shape_data_mut(&mut self) -> &mut ShapeData;
 
@@ -71,6 +73,7 @@ pub struct ShapeImpl {
     shape_data: ShapeData,
 }
 
+#[allow(dead_code)]
 impl ShapeImpl {
     pub fn new() -> Self {
         println!("  ShapeImpl::new() - Creating base shape");
@@ -86,6 +89,7 @@ impl ShapeImpl {
     }
 }
 
+#[allow(dead_code)]
 impl Shape for ShapeImpl {
     fn shape_data(&self) -> &ShapeData {
         &self.shape_data
@@ -104,6 +108,7 @@ impl Shape for ShapeImpl {
     }
 }
 
+#[allow(dead_code)]
 // Implement Display for ShapeImpl
 impl fmt::Display for ShapeImpl {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {

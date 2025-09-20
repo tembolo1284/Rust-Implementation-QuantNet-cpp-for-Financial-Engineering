@@ -28,9 +28,9 @@ fn main() {
     let p = Point::new(10.0, 20.0);  // Create point
     let l = Line::new(Point::new(1.0, 2.0), Point::new(3.0, 4.0));  // Create line
     
-    println!("{}", s.to_string());  // Print shape
-    println!("{}", p.to_string());  // Print point  
-    println!("{}", l.to_string());  // Print line
+    println!("{}", s);  // Print shape
+    println!("{}", p);  // Print point  
+    println!("{}", l);  // Print line
     println!();
 
     // Test 2: ID access (answers C++ questions)
@@ -64,9 +64,8 @@ fn main() {
     // Test 4: Assignment and copying (answers the ID copying question)
     println!("=== Test 4: Assignment and Copying ===");
     
-    let mut p2 = Point::default();
-    p2 = p.clone();  // Rust uses clone() instead of assignment operator
-    println!("{}, ID: {}", p2.to_string(), p2.id());
+    let p2 = p.clone();
+    println!("{}, ID: {}", p2, p2.id());
     // Is the ID copied? YES - because clone() copies the ShapeData field
     
     println!("Original point ID: {}", p.id());
@@ -78,7 +77,7 @@ fn main() {
     println!("=== Test 5: Polymorphic Behavior Demonstration ===");
     
     fn print_shape_info(shape: &dyn Shape) {
-        println!("Shape info: {}, ID: {}", shape.to_string(), shape.id());
+        println!("Shape info: {}, ID: {}", shape, shape.id());
     }
     
     print_shape_info(&s);
@@ -91,7 +90,7 @@ fn main() {
     println!("In Rust: Point 'HAS-A' ShapeData and 'IMPLEMENTS' Shape trait (composition)");
     
     let point = Point::new(42.0, 24.0);
-    println!("Point: {}", point.to_string());
+    println!("Point: {}", point);
     println!("Point coordinates: ({}, {})", point.x(), point.y());
     println!("Point ID (from Shape trait): {}", point.id());
 
