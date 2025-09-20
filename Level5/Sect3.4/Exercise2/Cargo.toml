@@ -1,0 +1,53 @@
+[package]
+name = "level5_3_4_exercise2"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+
+[dependencies]
+rand = "0.8"
+
+# Rust Inheritance vs C++ Inheritance Concepts
+# ===========================================
+#
+# This exercise demonstrates how Rust achieves inheritance-like behavior using:
+#
+# 1. TRAITS instead of BASE CLASSES:
+#    - C++: class Point : public Shape
+#    - Rust: impl Shape for Point
+#    - Traits define shared behavior, not shared data
+#
+# 2. COMPOSITION instead of INHERITANCE:
+#    - C++: Point inherits Shape's data members
+#    - Rust: Point contains a ShapeData field
+#    - "Has-a" relationship instead of "Is-a"
+#
+# 3. TRAIT OBJECTS for POLYMORPHISM:
+#    - C++: Shape* sp = &p; (pointer to base class)
+#    - Rust: Box<dyn Shape> or &dyn Shape
+#    - Dynamic dispatch through trait objects
+#
+# 4. NO VIRTUAL FUNCTIONS NEEDED:
+#    - Rust trait methods are dynamically dispatched by default
+#    - No need for explicit 'virtual' keyword
+#
+# 5. MEMORY SAFETY:
+#    - No raw pointers or memory leaks
+#    - Ownership system prevents dangling references
+#    - No need for virtual destructors
+#
+# Key Rust Concepts Demonstrated:
+# - Trait definition and implementation
+# - Composition over inheritance
+# - Trait objects for polymorphism
+# - Default trait implementations
+# - Associated functions vs methods
+#
+# Educational Value:
+# - Shows how modern languages handle OOP without traditional inheritance
+# - Demonstrates composition patterns
+# - Illustrates Rust's approach to polymorphism
+# - Compares memory safety approaches
